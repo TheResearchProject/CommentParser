@@ -1,0 +1,21 @@
+Django==1.9.6
+beautifulsoup4==4.4.1
+bs4==0.0.1
+django-mysql==1.0.9
+feedparser==5.2.1
+mysqlclient==1.3.7
+nltk==3.2.1
+numpy==1.11.1
+requests==2.10.0
+readchar==0.7
+gensim==0.13.1
+afinn==0.0.1rc1
+networkx==1.11
+scikit-learn==0.17.1
+Pattern==2.6
+django-js-reverse==0.7.2
+django-bulk-update==1.1.10
+Unidecode==0.04.19
+-e git://github.com/williamleif/histwords.git@0dbf2abfc6001d7dd3fe6567fd20a7597e2c2308#egg=histwords-master
+celery==4.0.2
+django-celery-results==1.0.1
