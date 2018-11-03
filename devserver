@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+#This script will "daemonize" the Django's development server
+#On Ubuntu, you can copy it to /etc/init.d and use it as a regular service
+# $ /etc/init.d/devserver start|stop|restart
+
+#Path to the installation foler
+APP="/home/vagrant/phd_backend"
+#Path to virtual environment            
+ENV="/home/vagrant/phd_backend/venv"
+#Path to the log file
+LOGFILE="/var/log/devserver"
+   
+get_pids() {
+	LEPIDS=$(ps aux | grep runserver | grep python | awk '{print $2}' | tr '\n' ' ')	
+}      
+get_pids      
+
+start() {
+	if [ ! -z "$LEPIDS" ]; then
+		echo "Process is already running with PIDs $LEPIDS"
+		exit 1     
+	fi
+	source $ENV/bin/activate
+	nohup python $APP/manage.py runserver > $LOGFILE 2>&1 &
+	echo "Started!"                                       
+}
+
+stop() {
+	if [ -z "$LEPIDS" ]; then
+		echo "Process is not running!"
+		exit 1                  
+	fi                 
+				  
+	kill $LEPIDS        
+	echo "Kill signals sent!"   	
+}
+          
+case "$1" in
+    start)
+    	start
+    ;;
+
+    stop)
+    	stop
+    ;;
+                                 
+    reload|force-reload)
+        echo "Use restart"
+    ;;                                        
+
+    restart)
+        stop
+        printf "Waiting for process to die."
+        while [ ! -z "$LEPIDS" ]; 
+        do
+        	get_pids
+        	printf "."
+        	sleep 1
+        done
+        printf "\nDone, now starting again\n"
+        start
+    ;;              
+
+    *)
+        echo "Starts/stops/restarts Django's development server"
+        echo "Usage: /etc/init.d/devserver {start|stop|restart}"
+        exit 64  # EX_USAGE
+    ;;
+esac
+          
+exit 0

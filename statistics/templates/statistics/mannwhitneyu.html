@@ -1,0 +1,32 @@
+{% extends 'statistics/base.html' %}
+{% block results %}
+  {% if start_month %}
+    <h3>Displaying results since {{ start_month }} until {{ end_month }} for algorithm {{ selected_algorithm.name }}</h3>
+  {% endif %}
+  <table>
+    <thead>
+      <th></th>
+      {% for result in results %}
+        <th>{{ result.name }} (N={{ result.amount_of_data }})</th>
+      {% endfor %}
+    </thead>
+    <tbody>
+      {% for result in results %}
+        <tr>
+          <td>
+            {{ result.name }}<br>
+            (N={{ result.amount_of_data }})
+          </td>
+          {% for cat_result in result.results %}
+            <td>
+              {{ cat_result.testing_value }}<br>
+              <span class="span-{% if cat_result.significance < 0.05 %}red{% else %}green{% endif %}">
+                {{ cat_result.significance }}
+              </span>
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}  

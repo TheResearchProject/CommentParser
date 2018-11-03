@@ -1,0 +1,31 @@
+{% extends 'statistics/base.html' %}
+{% load staticfiles %}
+{% block date_filter %}
+  <h3>First interval</h3>
+  <span>Start date:</span>
+  <input name="start_date1" id="start_date1" class='datepicker' size='11' title='D-MMM-YYYY' />
+  <br>
+  <span>End date:</span>
+  <input name="end_date1" id="end_date1" class='datepicker' size='11' title='D-MMM-YYYY' />
+  <h3>Second interval</h3>
+  <span>Start date:</span>
+  <input name="start_date2" id="start_date2" class='datepicker' size='11' title='D-MMM-YYYY' />
+  <br>
+  <span>End date:</span>
+  <input name="end_date2" id="end_date2" class='datepicker' size='11' title='D-MMM-YYYY' />
+  <h3>Filters</h3>
+{% endblock %}
+{% block results %}
+  {% if start_date1 %}
+    <h3>Displaying results comparing intervals: <h3>
+    <p>==> {{ start_date1 }} until {{ end_date1 }}</p>
+    <p>==> {{ start_date2 }} until {{ end_date2 }}</p>
+    <p>for category {{ category.label }} and for algorithm {{ selected_algorithm.name }}</h3>
+    <div>
+      <b>Testing Value: </b>{{ result.testing_value }}<br>
+      <b>Significance: </b>{{ result.significance }}
+    </div>
+  {% endif %}
+  <link rel="stylesheet" type="text/css" href="{% static "statistics/datepicker/datepicker.css" %}" />
+  <script type="text/javascript" src="{% static "statistics/datepicker/datepicker.js" %}"></script>
+{% endblock %}

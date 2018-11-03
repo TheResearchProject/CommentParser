@@ -1,0 +1,18 @@
+<span>Start month:</span>
+<select name="start_month">
+  {% for month in months %}
+    <option value="{{ month }}"
+            {% if month == start_month %}selected{% endif %}>
+            {{ month }}</option>
+  {% endfor %}
+</select>
+<br>
+<span>End month:</span>
+<select name="end_month">
+  {% for month in months %}
+    <option value="{{ month }}"
+            {% if month == end_month %}selected{% endif %}>
+            {{ month }}</option>
+  {% endfor %}
+</select>
+<br>

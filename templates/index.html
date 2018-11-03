@@ -1,0 +1,90 @@
+{% load staticfiles %}
+<html>       
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static "lda_stats/css/jquery-ui-1.10.1.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "lda_stats/css/app.css" %}" />
+  <script type="text/javascript" src="{% static "lda_stats/js/jquery-1.9.1.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "lda_stats/js/jquery-ui-1.10.1.js" %}"></script>
+  <script type="text/javascript" src="{% static "lda_stats/js/d3.v3.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "lda_stats/js/app.js" %}"></script>
+</head>              
+<body>
+
+<!-- ======================================== GENERAL STATS ======================= -->
+<h1>Stats at a glance</h1>
+<hr>
+<div>
+
+Starting data data collection <div style="font-weight:bold" id="stats_start_date"></div>
+
+Number of NewsItems <div style="font-weight:bold" id="stats_newsitems_num"></div>
+
+Number of authors <div style="font-weight:bold" id="stats_authors_num"></div>
+
+Averagde number of NewsItems/author <div style="font-weight:bold" id ="stats_newsitem_author_avg"></div>
+
+Number of comments <div style="font-weight:bold" id="stats_comments_num"></div>
+
+Number of commenters <div style="font-weight:bold" id="stats_commenters_num"></div>
+
+Average number of comments/commenter <div style="font-weight:bold" id="stats_comment_commenter_avg"></div>
+
+Number of Images <div style="font-weight:bold" id="stats_images_num"></div>
+
+Average number of comment/newsitem <div style="font-weight:bold" id="stats_comment_newsitem_avg"></div>
+
+Average number of images/newsitem <div style="font-weight:bold" id="stats_images_newsitem_avg"></div>
+
+Total number of tweets/FB likes/G+/PinIt’s <div style="font-weight:bold" id="stats_socialnet_num"></div>
+
+Avg number of tweets/FB likes/G+/PinIt’s  <div style="font-weight:bold" id="stats_socialnet_avg"></div>
+
+Avg number of words/newsItem  <div style="font-weight:bold" id="stats_newsitem_words_avg"></div>
+
+Avg number of words/comment  <div style="font-weight:bold" id="stats_comment_words_avg"></div>
+Avg wordlength/newsItem  <div style="font-weight:bold" id="stats_newsitem_wordlen_avg"></div>
+Avg wordlength/commen <div style="font-weight:bold" id="stats_comment_wordlen_avg"></div>
+</div>
+
+<!-- ======================================== HOT TPOICS ======================= -->
+<h1>Hot Topics</h1>
+<hr>
+
+Interval:
+<select id="hot_topics_interval">
+  <option value="1">Month</option>
+  <option value="3">Trimester</option>
+  <option value="12">Year</option>
+</select>
+
+Algorithm:
+<select id="hot_topics_alg">
+  <option value="lda">LDA</option>
+  <option value="lda_phrases">LDA+Phrase Extraction</option>
+</select>
+
+<div id="hot_topics_div">
+</div>
+
+<!-- ======================================== Influential Tpoics ======================= -->
+<h1>Influential Topics Identification</h1>
+<hr>
+
+<table border=1>
+  <thead style="font-weight:bold;">
+    <tr>
+      <td> # </td>
+      <td>NewsItem Title</td>
+      <td>Total Comments</td>
+    </tr>
+  </thead>
+  <tbody id="influential_items"></tbody>
+</table>
+
+<h2> Infuential Words(for bubble chart) </h2>
+<div id="influential_words">
+  Loading ...
+</div>
+
+</body>
+</html>

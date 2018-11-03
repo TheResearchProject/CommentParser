@@ -1,0 +1,76 @@
+{% load staticfiles %}
+<html>
+<head>
+  <style>
+    .span-green {
+        color: green;
+    }
+    .span-red {
+        color: red;
+    }      
+    table {
+      border-width: 1px;
+      border-color: black;
+      border-style: solid;
+      border-spacing: 0px;
+    }
+    th {
+        background-color: red;
+        color: white;
+    }    
+    tr td:first-child {
+        background-color: red;
+        color: white;
+        font-weight: bold;
+    }    
+  </style>
+</head>
+<body>
+  <form>
+    <span>Database:</span>
+    <select name="database" id="sel_database">
+      {% for database in databases %}
+        <option value="{{ database }}" 
+                {% if database == selected_database %}selected{% endif %}>
+                {{ database }}</option>
+      {% endfor %}
+    </select>
+    <br>    
+  </form>
+  <form method="POST">
+    {% csrf_token %}
+    {% block date_filter %}
+      {% include 'statistics/month_filter.html' %}
+    {% endblock %}
+    <span>Algorithm:</span>
+    <select name="algorithm">
+      {% for algorithm in algorithms %}
+        <option value="{{ algorithm.id }}"
+                {% if algorithm == selected_algorithm %}selected{% endif %}>
+                {{ algorithm.name }}</option>
+      {% endfor %}
+    </select>
+    <br>    
+    {% if categories %}
+      <span>Category:</span>
+      <select name="category">
+        {% for category in categories %}
+          <option value="{{ category }}">{{ category }}</option>
+        {% endfor %}
+      </select>    
+      <br>        
+    {% endif %}
+    <input type="hidden" value="{{ selected_database }}" name="database"/>
+    <input type="submit"/>
+  </form>
+  {% block results %}{% endblock %}
+  <script type="text/javascript" src="{% static "netvis/js/jquery-1.9.1.min.js" %}"></script>
+  <script>
+    $(function() {
+      $('#sel_database').change(function() {
+          this.form.submit();
+      });
+    });
+  </script>
+</body>
+</html>

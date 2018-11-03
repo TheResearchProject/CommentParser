@@ -1,0 +1,10 @@
+*.pyc
+__pycache__
+settings_dev.py
+settings_prod.py
+venv
+cron_update.sh
+sample.sqlite3
+models
+default.sqlite3
+*.cpickle

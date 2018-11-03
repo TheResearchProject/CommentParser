@@ -1,0 +1,15 @@
+{
+  "name": "wordcloud2.js",
+  "homepage": "https://github.com/timdream/wordcloud2.js",
+  "version": "1.0.5",
+  "_release": "1.0.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.5",
+    "commit": "d5314c293240b2071b63cd14b053d9090d5ea2e7"
+  },
+  "_source": "https://github.com/timdream/wordcloud2.js.git",
+  "_target": "^1.0.5",
+  "_originalSource": "wordcloud2.js",
+  "_direct": true
+}
